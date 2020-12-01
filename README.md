@@ -2,8 +2,8 @@
 
 ## Setup:
 
-- Create a free account at [Click me!](https://openweathermap.org/) for your apiKey
-- Create a free account at [Click me!](https://ipinfo.io/) for your ipToken.
+- Create a free account at [openweathermap.org](https://home.openweathermap.org/users/sign_up) for your apiKey
+- Create a free account at [ipinfo.io](https://ipinfo.io/) for your ipToken.
 
 > In "/src/config" create a default.json file and store your apikey and ipToken in camel notation.
 >
