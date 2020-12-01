@@ -22,12 +22,13 @@ class Home extends Component {
       `https://api.openweathermap.org/data/2.5/onecall?lat=${location[0]}&lon=${location[1]}&units=imperial&appid=${config.apiKey}`
     );
 
-    const state = { ...this.state };
+    const state = {};
     state.current = data.current;
     state.daily = data.daily;
     state.hourly = data.hourly;
     state.timezoneOffset = data.timezone_offset;
     state.location = this.getLocation(data.timezone);
+    state.stateName = "";
     if (data.alerts) {
       state.alerts = data.alerts;
     }
@@ -42,24 +43,32 @@ class Home extends Component {
 
   handleSubmit = async (value) => {
     if (value) {
-      const res = await http.get(
-        `https://geocode.xyz/${value}?json=1?region=US`
-      );
-      const { data } = await http.get(
-        `https://api.openweathermap.org/data/2.5/onecall?lat=${res.data.latt}&lon=${res.data.longt}&units=imperial&appid=cb879b4844206c1fbb59f2d987588976`
-      );
-      const state = {
-        current: data.current,
-        daily: data.daily,
-        hourly: data.hourly,
-        timezoneOffset: data.timezone_offset,
-        location: res.data.standard.city,
-      };
-      if (data.alerts) {
-        state.alerts = data.alerts;
+      try {
+        const res = await http.get(
+          `https://geocode.xyz/${value}?json=1?region=US&auth=${config.geoToken}`
+        );
+        const detailedRes = await http.get(
+          `https://geocode.xyz/${res.data.latt},${res.data.longt}?json=1&auth=${config.geoToken}`
+        );
+        const { data } = await http.get(
+          `https://api.openweathermap.org/data/2.5/onecall?lat=${res.data.latt}&lon=${res.data.longt}&units=imperial&appid=cb879b4844206c1fbb59f2d987588976`
+        );
+        const state = {
+          current: data.current,
+          daily: data.daily,
+          hourly: data.hourly,
+          timezoneOffset: data.timezone_offset,
+          location: res.data.standard.city,
+          stateName: detailedRes.data.statename,
+        };
+        if (data.alerts) {
+          state.alerts = data.alerts;
+        }
+        this.setState(state);
+        console.log(detailedRes);
+      } catch (error) {
+        console.log(error);
       }
-      this.setState(state);
-      console.log(data);
     }
   };
 
@@ -69,7 +78,11 @@ class Home extends Component {
         <Navbar handleSubmit={this.handleSubmit} />
         <div className="container mx-auto mt-10">
           <div className="flex items-center justify-center mb-10 bg-gray-900 py-3 rounded-2xl">
-            <p className="text-3xl text-white">{this.state.location}</p>
+            <p className="text-3xl text-white">
+              {this.state.location}
+              {this.state.stateName && ", "}
+              {this.state.stateName && <span>{this.state.stateName}</span>}
+            </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 md:gap-4">
             <div className="col-span-1 mx-auto md:ml-2 lg:mx-10">
