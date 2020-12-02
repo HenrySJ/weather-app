@@ -38,5 +38,4 @@ const detailedRes = await http.get(
 ## Future features:
 
 - Caching of weather data by city
-- robust error handling
 - autocomplete city names in the search box
