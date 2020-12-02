@@ -5,6 +5,8 @@ import Daily from "./daily";
 import Hourly from "./hourly";
 import Navbar from "./navbar";
 import config from "../config";
+import { ToastContainer, toast, Zoom } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class Home extends Component {
   state = {};
@@ -67,7 +69,7 @@ class Home extends Component {
         this.setState(state);
         console.log(detailedRes);
       } catch (error) {
-        console.log(error);
+        toast.error("City not found. Please check spelling.");
       }
     }
   };
@@ -76,6 +78,7 @@ class Home extends Component {
     return (
       <>
         <Navbar handleSubmit={this.handleSubmit} />
+        <ToastContainer draggable={false} transition={Zoom} autoClose={6000} />
         <div className="container mx-auto mt-10">
           <div className="flex items-center justify-center mb-10 bg-gray-900 py-3 rounded-2xl">
             <p className="text-3xl text-white">
