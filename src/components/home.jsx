@@ -4,7 +4,6 @@ import CurrentDay from "./current-day";
 import Daily from "./daily";
 import Hourly from "./hourly";
 import Navbar from "./navbar";
-import config from "../config";
 import { ToastContainer, toast, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -18,10 +17,12 @@ class Home extends Component {
     const ip = res.match(/ip=([\w.]+)/)[1];
     const {
       data: { loc },
-    } = await http.get(`https://ipinfo.io/${ip}?token=${config.ipToken}`);
+    } = await http.get(
+      `https://ipinfo.io/${ip}?token=${process.env.REACT_APP_IP_TOKEN}`
+    );
     const location = loc.split(",");
     const { data } = await http.get(
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${location[0]}&lon=${location[1]}&units=imperial&appid=${config.apiKey}`
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${location[0]}&lon=${location[1]}&units=imperial&appid=${process.env.REACT_APP_API_KEY}`
     );
 
     const state = {};
@@ -47,13 +48,13 @@ class Home extends Component {
     if (value) {
       try {
         const res = await http.get(
-          `https://geocode.xyz/${value}?json=1?region=US&auth=${config.geoToken}`
+          `https://geocode.xyz/${value}?json=1?region=US&auth=${process.env.REACT_APP_GEO_TOKEN}`
         );
         const detailedRes = await http.get(
-          `https://geocode.xyz/${res.data.latt},${res.data.longt}?json=1&auth=${config.geoToken}`
+          `https://geocode.xyz/${res.data.latt},${res.data.longt}?json=1&auth=${process.env.REACT_APP_GEO_TOKEN}`
         );
         const { data } = await http.get(
-          `https://api.openweathermap.org/data/2.5/onecall?lat=${res.data.latt}&lon=${res.data.longt}&units=imperial&appid=cb879b4844206c1fbb59f2d987588976`
+          `https://api.openweathermap.org/data/2.5/onecall?lat=${res.data.latt}&lon=${res.data.longt}&units=imperial&appid=${process.env.REACT_APP_API_KEY}`
         );
         const state = {
           current: data.current,
