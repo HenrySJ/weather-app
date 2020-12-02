@@ -20,13 +20,11 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "dev": "npm run build:style && react-scripts start",
     "build:style": "tailwind build src/styles/index.css -o src/styles/tailwind.css",
-    "start": "serve -s build",
-    "build": "build:style && react-scripts build",
+    "start": "npm run build:style && react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "npm run build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
