@@ -55,7 +55,7 @@ class Daily extends Component {
         <p className="bg-yellow-300 py-1 px-3 text-2xl text-yellow-900 lg:py-4 rounded-2xl text-center tracking-widest">
           Daily Forecast
         </p>
-        <div className="mt-20 mx-4 h-full overflow-auto overscroll-auto">
+        <div className="mt-16 mx-4 h-104 overflow-auto overscroll-auto">
           <List data={array} />
         </div>
       </div>

@@ -4,7 +4,7 @@ import capitilize from "../../functions/capitilize";
 const Card = (props) => {
   const { imgSrc, temp, date, data } = props;
   return (
-    <div className="container bg-gradient-to-b from-blue-600 to-blue-100 rounded-2xl shadow-lg">
+    <div className="container bg-gradient-to-b from-blue-600 to-blue-300 rounded-2xl shadow-lg">
       <p className="select-none float-right cursor-default -my-6 mx-4 bg-yellow-300 px-3 py-2 rounded-2xl text-2xl text-yellow-900 tracking-wide">
         {date}
       </p>
@@ -19,7 +19,7 @@ const Card = (props) => {
           return (
             <div
               key={key}
-              className="bg-clip-text text-transparent bg-gradient-to-t from-blue-800 to-blue-500 mb-3 transition duration-500 my-1 ease-in-out rounded py-3"
+              className="text-gray-100 transition duration-500 ease-in-out rounded py-3"
             >
               <p className=" text-3xl text-center cursor-default select-none">
                 {capitilize(key)}:
