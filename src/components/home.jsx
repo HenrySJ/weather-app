@@ -39,46 +39,49 @@ class Home extends Component {
       state.alerts = data.alerts;
     }
     this.setState(state);
-    console.log("Home State:", this.state);
-    console.log("data:", data);
   }
 
   getLocation = (timezone) => {
     return timezone.split("/")[1];
   };
 
+  setWeather = async (lat, lon, city, prov) => {
+    if (prov) {
+      const { data } = await http.get(
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${process.env.REACT_APP_API_KEY}`
+      );
+      const state = {
+        current: data.current,
+        daily: data.daily,
+        hourly: data.hourly,
+        timezoneOffset: data.timezone_offset,
+        location: city,
+        stateName: prov,
+      };
+      if (data.alerts) {
+        state.alerts = data.alerts;
+      }
+      this.setState(state);
+    }
+  };
+
+  handleClick = ({ latt, longt, city, prov }) => {
+    this.setWeather(latt, longt, city, prov);
+  };
+
   handleSubmit = async (city) => {
     if (city) {
       try {
-        const res = await http.get(
+        const { data } = await http.get(
           `https://geocode.xyz/${city}?geoit=json&region=US&auth=${process.env.REACT_APP_GEO_TOKEN}`
         );
-        console.log(res);
-        if (res.data.alt.loc) {
-          console.log("in the if");
+        if (data.alt.loc) {
           const state = { ...this.state };
           state.alts = "";
-          state.alts = [...res.data.alt.loc];
+          state.alts = [...data.alt.loc];
           this.setState(state);
         }
-        const detailedRes = await http.get(
-          `https://geocode.xyz/${res.data.latt},${res.data.longt}?json=1&auth=${process.env.REACT_APP_GEO_TOKEN}`
-        );
-        const { data } = await http.get(
-          `https://api.openweathermap.org/data/2.5/onecall?lat=${res.data.latt}&lon=${res.data.longt}&units=imperial&appid=${process.env.REACT_APP_API_KEY}`
-        );
-        const state = {
-          current: data.current,
-          daily: data.daily,
-          hourly: data.hourly,
-          timezoneOffset: data.timezone_offset,
-          location: res.data.standard.city,
-          stateName: detailedRes.data.statename,
-        };
-        if (data.alerts) {
-          state.alerts = data.alerts;
-        }
-        this.setState(state);
+        this.setWeather(data.latt, data.longt, data.standard.city);
       } catch (error) {
         toast.error("City not found. Please check spelling.");
       }
@@ -91,7 +94,9 @@ class Home extends Component {
         <ToastContainer draggable={false} transition={Zoom} autoClose={6000} />
         <Navbar handleSubmit={this.handleSubmit} />
         <div className="container mx-auto">
-          {this.state.alts && <Option options={this.state.alts} />}
+          {this.state.alts && (
+            <Option options={this.state.alts} handleClick={this.handleClick} />
+          )}
         </div>
         <div className="container mx-auto mt-6">
           <div className="flex items-center justify-center mb-10 bg-gray-900 py-3 rounded-2xl">

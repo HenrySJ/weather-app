@@ -1,6 +1,6 @@
 import React from "react";
 
-const Option = ({ options }) => {
+const Option = ({ options, handleClick }) => {
   return (
     <div
       className={
@@ -12,11 +12,13 @@ const Option = ({ options }) => {
       {options.map((current) => {
         return (
           <div
+            onClick={() => handleClick(current)}
             key={current.latt}
-            className="flex content-center justify-center rounded-lg bg-green-300 w-40 mr-6 px-3 py-4"
+            className="flex content-center justify-center rounded-lg  hover:bg-blue-600 hover:shadow-2xl  text-gray-200 text-lg bg-indigo-500 w-40 mb-4 mr-6 px-3 py-4"
           >
             <p className="flex">
-              <span>{current.city.toUpperCase()},</span> {current.prov}
+              <span className="mr-1">{current.city.toUpperCase()},</span>
+              {current.prov}
             </p>
           </div>
         );
