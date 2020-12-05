@@ -89,8 +89,8 @@ class Hourly extends Component {
             }}
             className={
               this.state.page === 1
-                ? "fas fa-angle-left fa-3x mx-4 bg-yellow-300 py-1 px-3 rounded text-yellow-900 cursor-not-allowed"
-                : "fas fa-angle-left fa-3x mx-4 bg-yellow-300 hover:bg-yellow-400 active:bg-yellow-900 py-1 px-3 rounded text-yellow-900"
+                ? "fas fa-angle-left fa-3x mx-8 bg-yellow-300 py-1 px-5 rounded text-yellow-900 cursor-not-allowed"
+                : "fas fa-angle-left fa-3x mx-8 bg-yellow-300 hover:bg-yellow-400 active:bg-yellow-900 py-1 px-5 rounded text-yellow-900"
             }
           ></i>
           <i
@@ -103,8 +103,8 @@ class Hourly extends Component {
             }}
             className={
               this.state.page === this.state.pages.length
-                ? "fas fa-angle-right fa-3x mx-4 bg-yellow-300 py-1 px-3 rounded text-yellow-900 cursor-not-allowed"
-                : "fas fa-angle-right fa-3x mx-4 bg-yellow-300 hover:bg-yellow-400 active:bg-yellow-900  py-1 px-3 rounded text-yellow-900"
+                ? "fas fa-angle-right fa-3x mx-8 bg-yellow-300 py-1 px-5 rounded text-yellow-900 cursor-not-allowed"
+                : "fas fa-angle-right fa-3x mx-8 bg-yellow-300 hover:bg-yellow-400 active:bg-yellow-900  py-1 px-5 rounded text-yellow-900"
             }
           ></i>
         </div>
