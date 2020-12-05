@@ -5,10 +5,6 @@ import Card from "./common/card";
 import formatTime from "../functions/formatTime";
 
 class CurrentDay extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   handleDirection(degree) {
     if (degree >= 0 && degree < 90) {
       if (degree > 20) return "NE";

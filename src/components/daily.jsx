@@ -5,10 +5,6 @@ import List from "./common/list";
 import formatTime from "../functions/formatTime";
 
 class Daily extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   format = (input) => {
     return input.map((data) => {
       return {
