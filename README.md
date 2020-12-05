@@ -2,12 +2,12 @@
 
 ## Setup:
 
-- Create a free account at [openweathermap.org](https://home.openweathermap.org/users/sign_up) for your apiKey
+- Create a free account at [openweathermap.org](https://home.openweathermap.org/users/sign_up) for your apiKey.
 - Create a free account at [ipinfo.io](https://ipinfo.io/) for your ipToken.
 
-- In the root of the project directory, create a .env file and store your API*KEY and IP_TOKEN.
-  ***FYI***
-  \*IN REACT, YOU MUST PREFIX YOUR .ENV VARIABLES WITH REACT_APP*\*
+- In the root of the project directory, create a .env file and store your API\*KEY and IP*TOKEN.
+  \*\*\_FYI*\*\*
+  \*IN REACT, YOU MUST PREFIX YOUR .ENV VARIABLES WITH REACT_APP & RESTART THE DEV SERVER AFTER CHANGES TO .ENV\*\*
 
 > I.E
 > REACT_APP_API_KEY=
@@ -15,26 +15,22 @@
 
 ### Important!
 
-- In the try block of the `handleSubmit` method of the home component, delete _&auth=${config.geoToken}_ from the _res_, and _detailedRes_ http requests.
+- In the `handleSubmit` method of the home component, delete _&auth=${process.env.REACT_APP_GEO_TOKEN}_ from the http requests.
 
-- geoToken is used to prevent [geocode.xyz](https://geocode.xyz/) from throttling requests to 1 per second.
+- GEO_TOKEN is used to prevent [geocode.xyz](https://geocode.xyz/) from throttling requests to 1 per second.
 
 ```javascript
-//                                 below this ->  V----------------------V
-const res = await http.get(
-  `https://geocode.xyz/${value}?json=1?region=US&auth=${config.geoToken}`
-);
-const detailedRes = await http.get(
-  `https://geocode.xyz/${res.data.latt},${res.data.longt}?json=1&auth=${config.geoToken}`
+const { data } = await http.get(
+  `https://geocode.xyz/${city}?geoit=json&region=US&auth=${process.env.REACT_APP_GEO_TOKEN}`
 );
 ```
 
 ## Features:
 
-- Responsive
+- Responsive.
 - Finds user's current location and displays current weather, 8 day forcast, and 48h hourly.
-- User can search for weather data for every city in the US
+- User can search for weather data for every city in the US.
 
 ## Future features:
 
-- Caching of weather data by city in a Mongodb db built with Node.js and express
+- Caching of weather data by city in a Mongodb database built with Node.js and express.
