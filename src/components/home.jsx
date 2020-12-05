@@ -4,11 +4,14 @@ import CurrentDay from "./current-day";
 import Daily from "./daily";
 import Hourly from "./hourly";
 import Navbar from "./navbar";
+import Option from "./common/option";
 import { ToastContainer, toast, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 class Home extends Component {
-  state = {};
+  state = {
+    alts: "",
+  };
 
   async componentDidMount() {
     const { data: res } = await http.get(
@@ -44,12 +47,20 @@ class Home extends Component {
     return timezone.split("/")[1];
   };
 
-  handleSubmit = async (value) => {
-    if (value) {
+  handleSubmit = async (city) => {
+    if (city) {
       try {
         const res = await http.get(
-          `https://geocode.xyz/${value}?json=1?region=US&auth=${process.env.REACT_APP_GEO_TOKEN}`
+          `https://geocode.xyz/${city}?geoit=json&region=US&auth=${process.env.REACT_APP_GEO_TOKEN}`
         );
+        console.log(res);
+        if (res.data.alt.loc) {
+          console.log("in the if");
+          const state = { ...this.state };
+          state.alts = "";
+          state.alts = [...res.data.alt.loc];
+          this.setState(state);
+        }
         const detailedRes = await http.get(
           `https://geocode.xyz/${res.data.latt},${res.data.longt}?json=1&auth=${process.env.REACT_APP_GEO_TOKEN}`
         );
@@ -68,7 +79,6 @@ class Home extends Component {
           state.alerts = data.alerts;
         }
         this.setState(state);
-        console.log(detailedRes);
       } catch (error) {
         toast.error("City not found. Please check spelling.");
       }
@@ -78,9 +88,12 @@ class Home extends Component {
   render() {
     return (
       <>
-        <Navbar handleSubmit={this.handleSubmit} />
         <ToastContainer draggable={false} transition={Zoom} autoClose={6000} />
-        <div className="container mx-auto mt-10">
+        <Navbar handleSubmit={this.handleSubmit} />
+        <div className="container mx-auto">
+          {this.state.alts && <Option options={this.state.alts} />}
+        </div>
+        <div className="container mx-auto mt-6">
           <div className="flex items-center justify-center mb-10 bg-gray-900 py-3 rounded-2xl">
             <p className="text-3xl text-white">
               {this.state.location}

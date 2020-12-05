@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import capitilize from "../functions/capitilize";
 
 class Navbar extends Component {
   constructor(props) {
@@ -22,8 +23,8 @@ class Navbar extends Component {
   submit = (e) => {
     e.preventDefault();
 
-    this.handleSubmit(this.state.value);
     const state = { ...this.state };
+    this.handleSubmit(capitilize(state.value));
     state.value = "";
     this.setState(state);
   };
