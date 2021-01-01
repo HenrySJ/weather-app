@@ -8,17 +8,17 @@ class Daily extends Component {
   format = (input) => {
     return input.map((data) => {
       return {
-        icon: data.weather[0].icon,
-        temp: data.temp.day,
-        date: formateDate(data.dt),
+        icon: data.icon,
+        temp: data.temp,
+        date: formateDate(data.date),
         data: {
-          forecast: capitilize(data.weather[0].description),
-          wind: `${data.wind_speed.toFixed(1)}mph ${this.handleDirection(
-            data.wind_deg
-          )}`,
-          humidity: `${data.humidity}%`,
-          sunrise: formatTime(time(data.sunrise)),
-          sunset: formatTime(time(data.sunset)),
+          forecast: data.data.forecast,
+          wind: `${data.data.wind.windSpeed.toFixed(
+            1
+          )}mph ${this.handleDirection(data.data.wind.windDegree)}`,
+          humidity: `${data.data.humidity}%`,
+          sunrise: formatTime(time(data.data.sunrise)),
+          sunset: formatTime(time(data.data.sunset)),
         },
       };
     });

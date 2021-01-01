@@ -25,38 +25,30 @@ class Home extends Component {
     );
     const location = loc.split(",");
     const { data } = await http.get(
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${location[0]}&lon=${location[1]}&units=imperial&appid=${process.env.REACT_APP_API_KEY}`
+      `https://weather-app-caching.herokuapp.com/api/weather?lat=${location[0]}&lon=${location[1]}`
     );
-
     const state = {};
     state.current = data.current;
     state.daily = data.daily;
     state.hourly = data.hourly;
-    state.timezoneOffset = data.timezone_offset;
-    state.location = this.getLocation(data.timezone);
-    state.stateName = "";
+    state.location = data.location;
     if (data.alerts) {
       state.alerts = data.alerts;
     }
     this.setState(state);
+    console.log(this.state);
   }
-
-  getLocation = (timezone) => {
-    return timezone.split("/")[1];
-  };
 
   setWeather = async (lat, lon, city, prov) => {
     if (prov) {
       const { data } = await http.get(
-        `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${process.env.REACT_APP_API_KEY}`
+        `https://weather-app-caching.herokuapp.com/api/weather?lat=${lat}&lon=${lon}`
       );
       const state = {
         current: data.current,
         daily: data.daily,
         hourly: data.hourly,
-        timezoneOffset: data.timezone_offset,
-        location: city,
-        stateName: prov,
+        location: data.location,
       };
       if (data.alerts) {
         state.alerts = data.alerts;
@@ -113,7 +105,7 @@ class Home extends Component {
               )}
             </div>
             <div className="mt-20 col-span-1 mx-auto md:mt-0  md:mr-0 lg:mx-10">
-              {this.state.daily && <Daily data={this.state.daily} />}
+              {this.state.daily && <Daily data={this.state.daily.data} />}
             </div>
           </div>
           <div className="ml-2 mt-40 md:mt-20 mx-auto lg:mx-10">
