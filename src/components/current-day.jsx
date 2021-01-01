@@ -26,18 +26,18 @@ class CurrentDay extends Component {
 
   render() {
     const { current } = this.props;
-    let icon = current.weather[0].icon;
+    let icon = current.icon;
     let temp = current.temp;
-    let date = formateDate(current.dt);
+    let date = formateDate(current.date);
     let data = {
-      forecast: capitilize(current.weather[0].description),
-      wind: `${current.wind_speed.toFixed(1)}mph ${this.handleDirection(
-        current.wind_deg
-      )}`,
-      humidity: `${current.humidity}%`,
-      visibility: `${current.visibility.toFixed(1) / 1000}km`,
-      sunrise: formatTime(time(current.sunrise)),
-      sunset: formatTime(time(current.sunset)),
+      forecast: current.forecast,
+      wind: `${current.data.wind.windSpeed.toFixed(
+        1
+      )}mph ${this.handleDirection(current.data.wind.windDegree)}`,
+      humidity: `${current.data.humidity}%`,
+      visibility: `${current.data.visibility.toFixed(1) / 1000}km`,
+      sunrise: formatTime(time(current.data.sunrise)),
+      sunset: formatTime(time(current.data.sunset)),
     };
 
     return (

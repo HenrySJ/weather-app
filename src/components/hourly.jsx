@@ -31,13 +31,13 @@ class Hourly extends Component {
     for (let i = 1; i <= numberOfPages; i++) {
       state.pages.push(i);
     }
-    state.paginatedData.labels = this.props.data
+    state.paginatedData.labels = this.props.data.data
       .map((current) => {
         return `${time(current.dt)}`;
       })
       .slice(0, state.pageSize);
 
-    state.paginatedData.datasets[0].data = this.props.data
+    state.paginatedData.datasets[0].data = this.props.data.data
       .map((current) => {
         return current.temp;
       })
@@ -50,13 +50,13 @@ class Hourly extends Component {
     const lastIndex = copy.pageSize * copy.page;
     const startIndex = lastIndex - copy.pageSize;
 
-    copy.paginatedData.labels = this.props.data
+    copy.paginatedData.labels = this.props.data.data
       .map((current) => {
         return time(current.dt);
       })
       .slice(startIndex, lastIndex);
 
-    copy.paginatedData.datasets[0].data = this.props.data
+    copy.paginatedData.datasets[0].data = this.props.data.data
       .map((current) => {
         return current.temp;
       })
