@@ -31,6 +31,9 @@ const { data } = await http.get(
 - Finds user's current location and displays current weather, 8 day forcast, and 48h hourly.
 - User can search for weather data for every city in the US.
 
-## Future features:
+## Full Stack
 
-- Caching of weather data by city in a Mongodb database built with Node.js and express.
+- The production version gets all of its weather info from my custom db and caching api!
+- You can you view the db repo on my github or [here](https://github.com/HenrySJ/weather-app-api)!
+
+Production version is live on [Heroku](https://hbsj-weather.herokuapp.com/)!
