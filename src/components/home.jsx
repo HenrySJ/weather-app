@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import http from '../services/httpService'
 import '../styles/home.css'
 
 class home extends Component {
   state = {}
-  componentDidMount() {
-      console.log('hello world')
+   async componentDidMount() {
+      const { data } = await http.get(`${http.url}`)
+      console.log(data)
   }
   render() {
     return (
