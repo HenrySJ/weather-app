@@ -47,5 +47,16 @@ main {
 #bottom {
   grid-column: 1;
   grid-row: 2;
-  backdrop-filter: blur(7rem);
+  backdrop-filter: blur(10rem);
+}
+
+@media not all and (min-resolution: 0.001dpcm) {
+  @media {
+    #bottom {
+      -webkit-backdrop-filter: blur(10rem);
+    }
+    .background::before {
+      -webkit-backdrop-filter: blur(10rem);
+    }
+  }
 }
