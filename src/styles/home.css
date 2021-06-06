@@ -50,8 +50,24 @@ main {
   backdrop-filter: blur(10rem);
 }
 
+@media (min-width: 768px) {
+  .glass {
+    grid-template-rows: 1fr;
+    grid-template-columns: 2fr 1fr;
+  }
+  #top {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  #bottom {
+    grid-column: 2;
+    grid-row: 1;
+    backdrop-filter: blur(10rem);
+  }
+}
+
 @media not all and (min-resolution: 0.001dpcm) {
-  @media {
+  @media and {
     #bottom {
       -webkit-backdrop-filter: blur(10rem);
     }
