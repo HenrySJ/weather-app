@@ -5,7 +5,7 @@ const http = {
   get: axios.get,
   put: axios.put,
   delete: axios.delete,
-  url: 'https://weather-app-caching.herokuapp.com/api/weather?lat=33.44&lon=-112.07',
+  url: 'https://weather-app-caching.herokuapp.com/api/weather?',
 }
 
 export default http
