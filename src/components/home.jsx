@@ -20,7 +20,6 @@ class home extends Component {
       let state = {...this.state}
       state = {...data}
       state.daily.splice(0, 1)
-      console.log(state)
       this.setState(state)
   }
   style = (header) => {
@@ -46,7 +45,7 @@ class home extends Component {
     state = {...data}
     state.daily.splice(0, 1)
     state.value = ""
-    // state.alts = "";
+    state.alts = "";
     this.setState(state)
   }
   handleSubmit = async (event) => {
@@ -56,12 +55,10 @@ class home extends Component {
             try {
                 if (city.match(/ /)) {
                     city = city.split(' ')[0] + '+' + city.split(' ')[1]
-                    console.log(city)
                 }
                 const { data } = await http.get(
                 `https://geocode.xyz/${city}?geoit=json&region=US&auth=${process.env.REACT_APP_GEO_TOKEN}`
                 );
-                console.log(data)
                 if (data.alt.loc) {
                     const state = { ...this.state };
                     state.alts = "";
@@ -78,7 +75,6 @@ class home extends Component {
                     this.handleData(data.latt, data.longt)
                 }
             } catch (error) {
-                console.log(error)
                 toast.error("City not found. Please check spelling.");
             }
         }
