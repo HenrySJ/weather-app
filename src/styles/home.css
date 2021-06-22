@@ -5,7 +5,7 @@ main {
 .background {
   height: 100vh;
   width: 100%;
-  background-image: url('../img/rgb-sky.jpg');
+  /* background-image: url('../img/rgb-sky.jpg'); */
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -21,48 +21,151 @@ main {
   backdrop-filter: blur(10rem);
 }
 .content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr) 30px;
+  grid-template-rows: 50px minmax(0, 1fr) 50px;
   height: 100vh;
+  grid-row-gap: 15px;
 }
 .glass {
-  height: 80%;
-  width: 88%;
-  background-image: url('../img/rgb-sky.jpg');
+  /* background-image: url('../img/rgb-sky.jpg'); */
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   display: grid;
-  grid-template-rows: 2fr 1fr;
+  grid-template-rows: 40px 1.5fr 40px 1fr;
   grid-template-columns: 1fr;
+  grid-row-gap: 1rem;
+  grid-column: 2;
+  grid-row: 2;
 }
+.weather-nav {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 0.5rem;
+}
+.search {
+  grid-column: 1 / span 3;
+  grid-row: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+input {
+  height: 1.5rem;
+  width: 10rem;
+}
+/* Top section CSS */
 #top {
   grid-column: 1;
-  grid-row: 1;
+  grid-row: 2;
+  align-self: center;
 }
+.locations {
+  display: flex;
+  overflow: scroll;
+  grid-column: 1;
+  grid-row: 1;
+  content: '';
+  backdrop-filter: blur(10rem);
+}
+.location {
+  display: flex;
+  margin-right: 1rem;
+  border: solid;
+  border-color: white;
+  padding: 0.25rem;
+}
+.weather {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#temp {
+  font-size: 4rem;
+}
+#forcast {
+  font-size: 1.3rem;
+}
+#hourly {
+  display: flex;
+  overflow: scroll;
+  grid-column: 1;
+  grid-row: 3;
+  content: '';
+  backdrop-filter: blur(10rem);
+}
+.hour {
+  display: flex;
+  /* flex-direction: column; */
+  margin: 0 1rem;
+  justify-content: center;
+  align-items: center;
+}
+.time {
+  margin-right: 5px;
+}
+/* Bottom section CSS */
 #bottom {
   grid-column: 1;
-  grid-row: 2;
+  grid-row: 4;
   backdrop-filter: blur(10rem);
+  overflow: scroll;
+}
+button {
+  display: block;
+  border-style: none none solid;
+  background: none;
+  padding: 0.5rem;
+  transition-duration: 1;
+  color: #f9fafb;
+  cursor: pointer;
+}
+ul {
+  margin: 1rem;
+}
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem;
+  height: 1rem;
+}
+.forcast-list {
+  margin: 2rem 0 3rem;
+}
+.small-icon {
+  object-fit: scale-down;
 }
 
 @media (min-width: 768px) {
   .glass {
-    grid-template-rows: 1fr;
-    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 40px 1fr 40px;
+    grid-template-columns: 1.5fr 1fr;
+    grid-gap: 0;
+  }
+  .locations {
+    grid-column: 1 / span 2;
+    grid-row: 1;
   }
   #top {
     grid-column: 1;
-    grid-row: 1;
+    grid-row: 2;
   }
   #bottom {
     grid-column: 2;
-    grid-row: 1;
-    backdrop-filter: blur(10rem);
+    grid-row: 2;
+  }
+  #hourly {
+    grid-column: 1 / span 2;
+    grid-row: 3;
+  }
+  input {
+    height: 1.5rem;
+    width: 15rem;
   }
 }
 
