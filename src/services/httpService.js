@@ -5,7 +5,7 @@ const http = {
   get: axios.get,
   put: axios.put,
   delete: axios.delete,
-  url: 'https://weather-app-caching.herokuapp.com/api/weather?',
+  url: `${process.env.REACT_APP_BACK_END}`,
 }
 
 export default http
