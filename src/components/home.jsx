@@ -16,11 +16,15 @@ class home extends Component {
         value: ''
     }
    async componentDidMount() {
-      const { data } = await http.get(`${http.url}lat=33.44&lon=-112.07`)
-      let state = {...this.state}
-      state = {...data}
-      state.daily.splice(0, 1)
-      this.setState(state)
+     try {
+        const { data } = await http.get(`${http.url}lat=33.44&lon=-112.07`)
+        let state = {...this.state}
+        state = {...data}
+        state.daily.splice(0, 1)
+        this.setState(state)
+     } catch (error) {
+         console.log(error)
+     }
   }
   style = (header) => {
     return (this.state.isActive === header) ? {borderColor: '#EDE9FE'} : {borderColor: '#6D28D9'}
@@ -80,10 +84,10 @@ class home extends Component {
         }
   };
   render() {
-      const {current, daily, hourly, alerts, location} = this.state
+      const {current, daily, hourly, location} = this.state
     return (
         <main>
-            {!current && <div class="loader"></div>}
+            {!current && <div className="loader"></div>}
             {current &&
             <div>
                 <div style={{ backgroundImage: `url(${weather(current.icon)})`}}  className="background"/>
