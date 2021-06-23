@@ -1,6 +1,26 @@
 main {
   height: 100vh;
   width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 .background {
   height: 100vh;
@@ -35,7 +55,7 @@ main {
   background-size: cover;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   display: grid;
-  grid-template-rows: 40px 1.5fr 40px 1fr;
+  grid-template-rows: 40px 1fr 40px 1fr;
   grid-template-columns: 1fr;
   grid-row-gap: 1rem;
   grid-column: 2;
@@ -92,18 +112,18 @@ input {
 }
 #hourly {
   display: flex;
-  overflow: scroll;
+  overflow-x: scroll;
   grid-column: 1;
   grid-row: 3;
   content: '';
   backdrop-filter: blur(10rem);
 }
 .hour {
+  margin: 0 15px;
   display: flex;
-  /* flex-direction: column; */
-  margin: 0 1rem;
   justify-content: center;
   align-items: center;
+  flex: 0 0 auto;
 }
 .time {
   margin-right: 5px;
@@ -142,8 +162,20 @@ li {
 }
 
 @media (min-width: 768px) {
+  #hourly::-webkit-scrollbar {
+    width: 12px;
+  }
+  #hourly::-webkit-scrollbar-track {
+    background: orange;
+  }
+
+  #hourly::-webkit-scrollbar-thumb {
+    background-color: blue;
+    border-radius: 20px;
+    border: 3px solid orange;
+  }
   .glass {
-    grid-template-rows: 40px 1fr 40px;
+    grid-template-rows: 65px 1fr 65px;
     grid-template-columns: 1.5fr 1fr;
     grid-gap: 0;
   }
