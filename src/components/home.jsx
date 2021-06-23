@@ -83,6 +83,7 @@ class home extends Component {
       const {current, daily, hourly, alerts, location} = this.state
     return (
         <main>
+            {!current && <div class="loader"></div>}
             {current &&
             <div>
                 <div style={{ backgroundImage: `url(${weather(current.icon)})`}}  className="background"/>
