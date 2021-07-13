@@ -9,6 +9,7 @@ import { direction } from '../functions/direction'
 import Icon from './common/icon'
 import capitilize from '../functions/capitilize'
 import weather from '../services/imageService'
+import textColor from '../functions/textColor';
 
 class home extends Component {
   state = { 
@@ -91,7 +92,7 @@ class home extends Component {
             {current &&
             <div>
                 <div style={{ backgroundImage: `url(${weather(current.icon)})`}}  className="background"/>
-            <section className="content">
+            <section style={{color: `${textColor(current.icon.match(/d/)[0])}`}} className="content">
                 <article style={{ backgroundImage: `url(${weather(current.icon)})`}} className="glass">
                     <article className="locations">
                          {this.state.alts && 
